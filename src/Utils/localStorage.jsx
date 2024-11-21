@@ -199,15 +199,34 @@ const employeeData = {
 
 
   export const setStorage = () => {
-    localStorage.setItem("emp", JSON.stringify(employeeData));
-    localStorage.setItem("admin", JSON.stringify(adminData));
+    try {
+      if (employeeData && adminData) {
+        localStorage.setItem("emp", JSON.stringify(employeeData));
+        localStorage.setItem("admin", JSON.stringify(adminData));
+        console.log("Data successfully saved to localStorage");
+      } else {
+        console.log("Invalid data provided to setStorage");
+      }
+    } catch (error) {
+      console.error("Error setting localStorage data:", error);
+    }
   };
   
-
-  export const getLocalStorage = ()=>{
-       const emp = JSON.parse(localStorage.getItem("emp"))
-       const admin = JSON.parse(localStorage.getItem("admin"))
-       console.log(emp, admin)
-        return( {emp, admin})
-        
-  }
+  export const getLocalStorage = () => {
+    try {
+      const emp = JSON.parse(localStorage.getItem("emp"));
+      const admin = JSON.parse(localStorage.getItem("admin"));
+  
+      if (emp && admin) {
+        console.log("Data retrieved from localStorage:", { emp, admin });
+      } else {
+        console.warn("No data found in localStorage for 'emp' or 'admin'");
+      }
+  
+      return { emp, admin };
+    } catch (error) {
+      console.error("Error reading localStorage data:", error);
+      return { emp: null, admin: null };
+    }
+  };
+  
