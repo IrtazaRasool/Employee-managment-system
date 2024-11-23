@@ -8,26 +8,37 @@ import { AuthContext } from "./Context/AuthProvider";
 const App = () => {
   //consts
   const [user, setUser] = useState(null);
-  const [empid, setEmpid] = useState("")
+  const [empId, setEmpid] = useState("");
+  const [adminId, setAdminId] = useState("");
 
   const authData = useContext(AuthContext);
-
-
+  const employee = "employee";
+  const admin = "admin";
 
   //funtions
 
   const handleLogin = (email, password) => {
-    if (email == "admin@me.com" && password == 123) {
+    if (
+      authData &&
+      authData.admin.find((e) => e.email == email && e.password == password)
+    ) {
+      const adId = authData.admin.find(
+        (e) => e.email == email && e.password == password
+      );
+      setAdminId(adId.id);
+      localStorage.setItem("LoggedInUser", JSON.stringify({ role: admin }));
       setUser("admin");
     } else if (
       authData &&
       authData.employee.find((e) => e.email == email && e.password == password)
     ) {
+      const emp = authData.employee.find(
+        (e) => e.email == email && e.password == password
+      );
+      setEmpid(emp.id);
+      setUser("employee");
 
-        const emp = authData.employee.find((e) => e.email == email && e.password == password)
-        setEmpid(emp.id)
-      setUser( "employee");
-      console.log(empid)
+      localStorage.setItem("LoggedInUser", JSON.stringify({ role: employee }));
     } else {
       alert("Invalid email or password");
     }
@@ -36,7 +47,11 @@ const App = () => {
   return (
     <>
       {!user ? <Login handleLogin={handleLogin} /> : ""}
-      {user === "admin" ? <AdminDashboard />:( user == "employee"?<EmployeeDashboard data={authData} id={empid}/> : null) }
+      {user === "admin" ? (
+        <AdminDashboard data={authData.admin} id={adminId} user={user} />
+      ) : user === "employee" ? (
+        <EmployeeDashboard data={authData.employee} id={empId} user={user} />
+      ) : null}
     </>
   );
 };

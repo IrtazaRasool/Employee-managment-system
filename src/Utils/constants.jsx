@@ -202,9 +202,19 @@ export const employeeData = [
 ];
 
 
-export const adminData = [{
-  "id": 1,
-  "email": "admin@example.com",
-  "password": "123"
-}];
+export const adminData = [
+  {
+    "id": 1,
+    "firstName": "Admin", // Placeholder first name
+    "email": "admin@me.com",
+    "password": "123",
+    "taskCounts": {
+      "active": 0,
+      "newTask": 0,
+      "completed": 0,
+      "failed": 0
+    },
+    "tasks": [] // Empty tasks array to maintain consistency
+  }
+];
 
