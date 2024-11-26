@@ -6,16 +6,13 @@ export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
 
-  const [authData, setAuthData] = useState(null)
+  const [authData, setAuthData] = useState({ employee: [], admin: [] });
 
    
   useEffect(() => {
     const userData = { employee: employeeData, admin: adminData };
     setAuthData(userData);
 }, []); // Only runs once on component mount
-
-
-
 
 
   // useEffect(() => {

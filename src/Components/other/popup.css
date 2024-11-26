@@ -1,0 +1,22 @@
+.my-popup-content {
+    width: 60%; /* Percentage width */
+    height: 70%; /* Percentage height */
+    margin: auto;
+    background: rgba(31, 29, 29, 0.282);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    padding: 20px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 0px 3px;
+    border-radius: 10px;
+  }
+  
+  .my-popup-overlay {
+    background: rgba(0, 0, 0, 0.85);
+  }
+  
+  .my-popup-arrow {
+    color: rgb(255, 255, 255);
+  }
+  
