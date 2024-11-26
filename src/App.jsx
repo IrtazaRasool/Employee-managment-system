@@ -11,11 +11,12 @@ const App = () => {
   const [empId, setEmpid] = useState("");
   const [adminId, setAdminId] = useState("");
 
-  const authData = useContext(AuthContext);
+  const [authData, setauthData] = useContext(AuthContext);
   const employee = "employee";
   const admin = "admin";
 
   //funtions
+
 
   const handleLogin = (email, password) => {
     if (
@@ -48,9 +49,9 @@ const App = () => {
     <>
       {!user ? <Login handleLogin={handleLogin} /> : ""}
       {user === "admin" ? (
-        <AdminDashboard data={authData.admin} id={adminId} user={user} />
+        <AdminDashboard changeUser={setUser} data={authData.admin} id={adminId} user={user} />
       ) : user === "employee" ? (
-        <EmployeeDashboard data={authData.employee} id={empId} user={user} />
+        <EmployeeDashboard changeUser={setUser} data={authData.employee} id={empId} user={user} />
       ) : null}
     </>
   );
